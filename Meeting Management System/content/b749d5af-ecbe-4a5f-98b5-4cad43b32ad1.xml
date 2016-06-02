@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_GetMeetingIdsBasedOnTimePeriod</name>
+        <uuid>b749d5af-ecbe-4a5f-98b5-4cad43b32ad1</uuid>
+        <description>Rule return meeting ids based on time periods</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35718</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>with(
+local!meetingId:fn!index(
+    #&quot;SYSTEM_SYSRULES_queryEntity&quot;(
+      entity:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35551&quot;,
+      query:#&quot;SYSTEM_SYSRULES_query&quot;(
+              selection:#&quot;SYSTEM_SYSRULES_querySelection&quot;(
+                columns:{
+                  #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;meetingId&quot;)
+                }
+              ),
+              logicalExpression:#&quot;SYSTEM_SYSRULES_queryLogicalExpression&quot;(
+                operator:&quot;AND&quot;,
+                filters:{
+                  #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+                    field:&quot;createDate&quot;,
+                    operator:&quot;between&quot;,
+                    value:{todatetime(eomonth(today(),-ri!int_number)),todatetime(eomonth(today(),1-ri!int_number))}
+                  ),
+                  #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+                    field:&quot;status&quot;,
+                    operator:&quot;&lt;&gt;&quot;,
+                    value:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[4]
+                    )
+                }
+              ),
+              pagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex:1,batchSize:-1)
+        )
+    ).data,
+    &quot;meetingId&quot;,
+    null
+  ),
+  {
+    month:fn!text(eomonth(today(),1-ri!int_number),&quot;MMMM, yyyy&quot;);
+    monthlastDate:eomonth(today(),1-ri!int_number),
+    count:fn!if(#&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(local!meetingId),
+              0,
+              fn!count(local!meetingId)
+            )
+  }
+)</definition>
+        <namedTypedValue>
+            <name>int_number</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

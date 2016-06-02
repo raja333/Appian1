@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_GetMeetingDetailsBasedOnTimePeriod</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47580</uuid>
+        <description>Rule returns meeting details based on date and time</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35544</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>if(#&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(ri!date_dateValue),
+   {},
+   #&quot;SYSTEM_SYSRULES_queryEntity&quot;(
+     entity:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35551&quot;,
+     query:#&quot;SYSTEM_SYSRULES_query&quot;(
+       selection:#&quot;SYSTEM_SYSRULES_querySelection&quot;(
+         columns:{
+           #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;meetingId&quot;),
+           #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;subject&quot;),
+           #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;createdUser&quot;),
+           #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;status&quot;),
+           #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;createDate&quot;),
+           #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;averageRating&quot;)
+         }
+       ),
+       logicalExpression:#&quot;SYSTEM_SYSRULES_queryLogicalExpression&quot;(
+         operator:&quot;AND&quot;,
+         filters:{
+           #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+             field:&quot;status&quot;,
+             operator:&quot;&lt;&gt;&quot;,
+             value:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[4]
+             ),
+           #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+             field:&quot;createDate&quot;,
+             operator:&quot;between&quot;,
+             value:{
+                    fn!todatetime(fn!date(fn!year(ri!date_dateValue),fn!month(ri!date_dateValue),1)),
+                    fn!todatetime(ri!date_dateValue)
+                }
+             )             
+         }
+       ),
+       pagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex:1,batchSize:-1,sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(ascending:false,field:&quot;createDate&quot;))
+     )
+   ).data
+)</definition>
+        <namedTypedValue>
+            <name>date_dateValue</name>
+            <type>
+                <name>date</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

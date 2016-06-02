@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_PopulateUpdatedAttendeesCDT</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47425</uuid>
+        <description>Rule populates the removed attendees CDT</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35544</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>with(&#xD;
+  local!cdt_attendeeDetails:if(#&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(ri!txt_userNames),{},&#xD;
+    #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_46613&quot;(&#xD;
+                int_meetingId:ri!int_meetingId, &#xD;
+                txt_userName:ri!txt_userNames      &#xD;
+      )&#xD;
+    ),&#xD;
+  local!count:count(local!cdt_attendeeDetails),&#xD;
+if(&#xD;
+  #&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(local!cdt_attendeeDetails),{},&#xD;
+  apply(&#xD;
+    'type!{urn:com:mms:appian:types:MMS}MMS_Attendees'(&#xD;
+      attendeeId:_,&#xD;
+      meetingId:_,&#xD;
+      attendeeFullName:_,&#xD;
+      userName:_,&#xD;
+      isAttended:_,&#xD;
+      checkInTime:_,&#xD;
+      feedback:_,&#xD;
+      rating:_,&#xD;
+      createdUser:_,&#xD;
+      createDate:_,&#xD;
+      modifiedUser:_,&#xD;
+      modifiedDate:_,&#xD;
+      isActive:_&#xD;
+    ),&#xD;
+    merge(&#xD;
+      local!cdt_attendeeDetails.attendeeId,&#xD;
+      local!cdt_attendeeDetails.meetingId,&#xD;
+      local!cdt_attendeeDetails.attendeeFullName,&#xD;
+      local!cdt_attendeeDetails.userName,&#xD;
+      repeat(local!count,null),&#xD;
+      repeat(local!count,null),&#xD;
+      repeat(local!count,null),&#xD;
+      repeat(local!count,null),&#xD;
+      local!cdt_attendeeDetails.createdUser,&#xD;
+      local!cdt_attendeeDetails.createDate,&#xD;
+      repeat(local!count,ri!txt_updatedUser),&#xD;
+      repeat(local!count,now()),&#xD;
+      repeat(local!count,true())&#xD;
+    )&#xD;
+  )&#xD;
+)&#xD;
+)&#xD;
+&#xD;
+&#xD;
+</definition>
+        <namedTypedValue>
+            <name>txt_userNames</name>
+            <type>
+                <name>Text?list</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>txt_updatedUser</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>int_meetingId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

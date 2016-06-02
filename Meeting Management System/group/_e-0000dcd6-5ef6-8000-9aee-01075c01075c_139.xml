@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<groupHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <group>
+        <name>MMS Executive Users</name>
+        <securityMap>SECURITYMAP_PUBLIC</securityMap>
+        <uuid>_e-0000dcd6-5ef6-8000-9aee-01075c01075c_139</uuid>
+        <groupTypeUuid>_f-0000dcd6-5ef6-8000-9aee-01075c01075c_8</groupTypeUuid>
+        <parentUuid>_e-0000dcd6-5ef6-8000-9aee-01075c01075c_138</parentUuid>
+        <description>Group contains users who has Executive role</description>
+        <delegatedCreation>false</delegatedCreation>
+        <memberPolicy>MEMBERPOLICY_CLOSED</memberPolicy>
+        <viewingPolicy>VIEWINGPOLICY_LOW</viewingPolicy>
+        <attributes/>
+    </group>
+    <members>
+        <users/>
+        <groups/>
+    </members>
+    <admins>
+        <users/>
+        <groups/>
+    </admins>
+    <ruleSet/>
+</groupHaul>

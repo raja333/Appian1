@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recordTypeHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <recordType name="Meeting Dashboard" a:uuid="9f0e3b41-b016-4bfd-9475-a243299bb73d">
+        <a:pluralName>Scheduled Meetings</a:pluralName>
+        <a:description>Directory shows the list of scheduled meeting details</a:description>
+        <a:urlStub>grY-Tg</a:urlStub>
+        <a:source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:DataStoreEntity" a:uuid="e98966a3-a59e-4c04-9df1-b3d791a900ea@_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35539"/>
+        <a:listViewTemplateExpr>#&quot;SYSTEM_SYSRULES_recordGridLayoutColumns&quot;(
+  columns: {
+    #&quot;SYSTEM_SYSRULES_gridLayoutColumn&quot;(
+      label: #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35612&quot;,
+      weight: 2,
+      component: #&quot;SYSTEM_SYSRULES_recordGrid_linkField&quot;(
+        links: #&quot;SYSTEM_SYSRULES_recordLink&quot;(   
+          label: rf!subject,
+          recordType: rp!type,
+          identifier: rp!id
+        )
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_gridLayoutColumn&quot;(
+      label: #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35614&quot;,
+      width: &quot;DISTRIBUTE&quot;,
+      weight: 1,
+      field: &quot;location&quot;,
+      component: #&quot;SYSTEM_SYSRULES_recordGrid_textField&quot;(
+        displayValue: rf!location
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_gridLayoutColumn&quot;(
+      label: #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35615&quot;,
+      width: &quot;DISTRIBUTE&quot;,
+      weight: 1,
+      field: &quot;startTime&quot;,
+      component: #&quot;SYSTEM_SYSRULES_recordGrid_textField&quot;(
+        displayvalue: #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35708&quot;(
+          rf!startTime
+        )
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_gridLayoutColumn&quot;(
+      label: #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35626&quot;,
+      helptooltip: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47316&quot;,
+      width: &quot;DISTRIBUTE&quot;,
+      weight: 1,
+      field: &quot;duration&quot;,
+      component: #&quot;SYSTEM_SYSRULES_recordGrid_textField&quot;(
+        displayvalue: rf!duration
+      )
+    ),
+    #&quot;SYSTEM_SYSRULES_gridLayoutColumn&quot;(
+      label: #&quot;_a-0000dce6-2b45-8000-9ba2-011c48011c48_42671&quot;,
+      width: &quot;DISTRIBUTE&quot;,
+      weight: 1,
+      field: &quot;createdUser&quot;,
+      component: #&quot;SYSTEM_SYSRULES_recordGrid_textField&quot;(
+        displayvalue: #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35710&quot;(
+           rf!createdUser
+        )
+
+      )
+    )  
+  },
+  pageSize: 50,
+  defaultSort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+    field: &quot;createDate&quot;,
+    ascending: false
+  )
+)</a:listViewTemplateExpr>
+        <a:fieldCfg name="Filter Based On Creator and Invitee">
+            <a:description></a:description>
+            <a:sourceRef>createdUser</a:sourceRef>
+            <a:isSortable>false</a:isSortable>
+            <a:isSearchable>false</a:isSearchable>
+            <a:isFacet>true</a:isFacet>
+            <a:facetType>CUSTOM_BUCKETS_CLOSED</a:facetType>
+            <a:isExclusiveFacet>true</a:isExclusiveFacet>
+            <a:facetLabelExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35740&quot;</a:facetLabelExpr>
+            <a:facetOption>
+                <a:labelExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35738&quot;</a:labelExpr>
+                <a:facetOperator>IN</a:facetOperator>
+                <a:lowerLimitExpr></a:lowerLimitExpr>
+                <a:upperLimitExpr></a:upperLimitExpr>
+                <a:values>=fn!loggedinuser()</a:values>
+            </a:facetOption>
+            <a:facetOption>
+                <a:labelExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35739&quot;</a:labelExpr>
+                <a:facetOperator>NOT_IN</a:facetOperator>
+                <a:lowerLimitExpr></a:lowerLimitExpr>
+                <a:upperLimitExpr></a:upperLimitExpr>
+                <a:values>=fn!loggedinuser()</a:values>
+            </a:facetOption>
+            <a:sortOrderIndex>0</a:sortOrderIndex>
+            <a:facetOrderIndex>0</a:facetOrderIndex>
+            <a:visibilityExpr></a:visibilityExpr>
+            <a:defaultOptionExpr></a:defaultOptionExpr>
+        </a:fieldCfg>
+        <a:fieldCfg name="Filter based on Meeting Status">
+            <a:description></a:description>
+            <a:sourceRef>status</a:sourceRef>
+            <a:isSortable>false</a:isSortable>
+            <a:isSearchable>false</a:isSearchable>
+            <a:isFacet>true</a:isFacet>
+            <a:facetType>CUSTOM_BUCKETS_CLOSED</a:facetType>
+            <a:isExclusiveFacet>true</a:isExclusiveFacet>
+            <a:facetLabelExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35742&quot;</a:facetLabelExpr>
+            <a:facetOption>
+                <a:labelExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[1]</a:labelExpr>
+                <a:facetOperator>IN</a:facetOperator>
+                <a:lowerLimitExpr></a:lowerLimitExpr>
+                <a:upperLimitExpr></a:upperLimitExpr>
+                <a:values>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[1]</a:values>
+            </a:facetOption>
+            <a:facetOption>
+                <a:labelExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[2]</a:labelExpr>
+                <a:facetOperator>IN</a:facetOperator>
+                <a:lowerLimitExpr></a:lowerLimitExpr>
+                <a:upperLimitExpr></a:upperLimitExpr>
+                <a:values>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[2]</a:values>
+            </a:facetOption>
+            <a:facetOption>
+                <a:labelExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[3]</a:labelExpr>
+                <a:facetOperator>IN</a:facetOperator>
+                <a:lowerLimitExpr></a:lowerLimitExpr>
+                <a:upperLimitExpr></a:upperLimitExpr>
+                <a:values>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[3]</a:values>
+            </a:facetOption>
+            <a:sortOrderIndex>1</a:sortOrderIndex>
+            <a:facetOrderIndex>1</a:facetOrderIndex>
+            <a:visibilityExpr></a:visibilityExpr>
+            <a:defaultOptionExpr></a:defaultOptionExpr>
+        </a:fieldCfg>
+        <a:detailViewCfg>
+            <a:nameExpr>=&quot;Summary&quot;</a:nameExpr>
+            <a:uiExpr>=#&quot;f77a05cc-ad45-4027-a9d1-55e789b91d6a&quot;(
+  rf!meetingId
+)</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>summary</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>fe164c60-f26e-47f9-80c2-a6e9e172ddd1</a:relatedActionCfg>
+            <a:relatedActionCfg>a76e36c5-6007-4a2f-9116-ff526324c357</a:relatedActionCfg>
+            <a:relatedActionCfg>2948d98f-4798-4dfb-b030-a7a4b220be60</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:detailViewCfg>
+            <a:nameExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35735&quot;</a:nameExpr>
+            <a:uiExpr>#&quot;e6be2a9a-e52c-49f5-a93f-d9d25120879b&quot;(
+ int_meetingId:rf!meetingId 
+)</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>_uLN3hg</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>2948d98f-4798-4dfb-b030-a7a4b220be60</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:detailViewCfg>
+            <a:nameExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35736&quot;</a:nameExpr>
+            <a:uiExpr>#&quot;90af0420-5ca8-4f12-aa4c-3fda7c769924&quot;(
+  int_meetingId:rf!meetingId
+)</a:uiExpr>
+            <a:visibilityExpr>rf!status=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[3]</a:visibilityExpr>
+            <a:urlStub>_BD1fUw</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>2948d98f-4798-4dfb-b030-a7a4b220be60</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:detailViewCfg>
+            <a:nameExpr>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35737&quot;</a:nameExpr>
+            <a:uiExpr>#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35706&quot;(
+  int_meetingId:rf!meetingId
+)</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>_RX0uxg</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+            <a:relatedActionCfg>2948d98f-4798-4dfb-b030-a7a4b220be60</a:relatedActionCfg>
+        </a:detailViewCfg>
+        <a:defaultFilter>
+            <a:field>status</a:field>
+            <a:operator>&lt;&gt;</a:operator>
+            <a:valueExpression>=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[4]</a:valueExpression>
+        </a:defaultFilter>
+        <a:defaultFilter>
+            <a:field>meetingId</a:field>
+            <a:operator>in</a:operator>
+            <a:valueExpression>fn!tointeger(
+  #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35730&quot;()
+)</a:valueExpression>
+        </a:defaultFilter>
+        <a:defaultFilter>
+            <a:field>createDate</a:field>
+            <a:operator>&gt;</a:operator>
+            <a:valueExpression>if(
+  mod(year(today()),4),
+  now()-365, 
+  now()-366 
+)
+</a:valueExpression>
+        </a:defaultFilter>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dce2-b62c-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{
+  int_meetingId:rf!meetingId
+}</a:contextExpr>
+            <a:visibilityExpr>=#&quot;319d19a3-62e0-433d-ab79-b2ee3d35fd60&quot;(&#xD;
+meetingInviter:rf!createdUser, &#xD;
+dt_StartTime:rf!startTime&#xD;
+)</a:visibilityExpr>
+            <a:refId>fe164c60-f26e-47f9-80c2-a6e9e172ddd1</a:refId>
+        </a:relatedActionCfg>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dce2-b65d-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{
+  int_meetingId:rf!meetingId
+}</a:contextExpr>
+            <a:visibilityExpr>=#&quot;319d19a3-62e0-433d-ab79-b2ee3d35fd60&quot;(
+  meetingInviter:rf!createdUser, 
+  dt_StartTime:rf!startTime
+)</a:visibilityExpr>
+            <a:refId>a76e36c5-6007-4a2f-9116-ff526324c357</a:refId>
+        </a:relatedActionCfg>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dce2-733c-8000-f92f-7f0000014e7a"/>
+            <a:contextExpr>{
+  int_meetingId:rf!meetingId
+}</a:contextExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:refId>2948d98f-4798-4dfb-b030-a7a4b220be60</a:refId>
+        </a:relatedActionCfg>
+        <a:isSystem>false</a:isSystem>
+        <a:dataSrcExpr></a:dataSrcExpr>
+        <a:facetsListExpr></a:facetsListExpr>
+        <a:titleExpr>concat(
+  #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47705&quot;,
+  &quot;-&quot;,
+  rf!meetingId
+  )
+</a:titleExpr>
+        <a:defaultFiltersExpr></a:defaultFiltersExpr>
+        <a:layoutType>GRID</a:layoutType>
+        <a:security>16383</a:security>
+    </recordType>
+    <roleMap>
+        <role name="record_type_administrator">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dcd6-5ef6-8000-9aee-01075c01075c_140</groupUuid>
+            </groups>
+        </role>
+        <role name="record_type_viewer">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dcd6-5ef6-8000-9aee-01075c01075c_141</groupUuid>
+                <groupUuid>_e-0000dcd6-5ef6-8000-9aee-01075c01075c_138</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</recordTypeHaul>

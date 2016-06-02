@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_SectionMeetingDetailsReadOnly</name>
+        <uuid>07e2806e-d51a-4bf4-b8d4-f6f2b1b8c97c</uuid>
+        <description>Interface for Meeting Details in Readonly format</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35682</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>#&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+  firstColumnContents:{&#xD;
+    #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+      label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47706&quot;,&#xD;
+      labelPosition:&quot;ADJACENT&quot;,&#xD;
+      readOnly:true,&#xD;
+      value:concat(#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47705&quot;,&quot;-&quot;,ri!cdt_meetingDetails.meetingId)&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+      label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35612&quot;,&#xD;
+      labelPosition:&quot;ADJACENT&quot;,&#xD;
+      readOnly:true,&#xD;
+      value:ri!cdt_meetingDetails.subject&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_paragraphField&quot;(&#xD;
+      label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35613&quot;,&#xD;
+      labelPosition:&quot;ADJACENT&quot;,&#xD;
+      readOnly:true,&#xD;
+      value:ri!cdt_meetingDetails.description&#xD;
+    ),&#xD;
+    if(ri!cdt_meetingDetails.status=#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[3],&#xD;
+      #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+        label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_48498&quot;,&#xD;
+        labelPosition:&quot;ADJACENT&quot;,&#xD;
+        readOnly:true,&#xD;
+        value:fn!tostring(index(ri!cdt_attendees,&quot;attendeeFullName&quot;,null))&#xD;
+      ),&#xD;
+      #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+        label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_48499&quot;,&#xD;
+        labelPosition:&quot;ADJACENT&quot;,&#xD;
+        readOnly:true,&#xD;
+        value:fn!tostring(index(ri!cdt_attendees,&quot;attendeeFullName&quot;,null))&#xD;
+      )&#xD;
+    )&#xD;
+  },&#xD;
+  secondColumnContents:{&#xD;
+    #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+      label:#&quot;_a-0000dce6-2b45-8000-9ba2-011c48011c48_42671&quot;,&#xD;
+      labelPosition:&quot;ADJACENT&quot;,&#xD;
+      readOnly:true,&#xD;
+      value:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35710&quot;(ri!cdt_meetingDetails.createdUser)&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+      label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35614&quot;,&#xD;
+      labelPosition:&quot;ADJACENT&quot;,&#xD;
+      readOnly:true,&#xD;
+      value:ri!cdt_meetingDetails.location&#xD;
+    ), &#xD;
+    #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+      label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35615&quot;,&#xD;
+      labelPosition:&quot;ADJACENT&quot;,&#xD;
+      readOnly:true,&#xD;
+      value:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35708&quot;(ri!cdt_meetingDetails.startTime)&#xD;
+    ),&#xD;
+    #&quot;SYSTEM_SYSRULES_textField&quot;(&#xD;
+      label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35626&quot;,&#xD;
+      labelPosition:&quot;ADJACENT&quot;,&#xD;
+      readOnly:true,&#xD;
+      value:concat(ri!cdt_meetingDetails.duration,&quot; &quot;,#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47694&quot;)&#xD;
+    ),    &#xD;
+  }&#xD;
+)&#xD;
+</definition>
+        <namedTypedValue>
+            <name>cdt_meetingDetails</name>
+            <type>
+                <name>MMS_MeetingDetails</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cdt_attendees</name>
+            <type>
+                <name>MMS_Attendees?list</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>Pavithra</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:n1="urn:com:mms:appian:types:MMS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="n1:MMS_MeetingDetails"/>
+                    <a:nameRef>cdt_meetingDetails</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:nameRef>cdt_attendees</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<groupTypeHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <groupType>
+        <name>MMS Meeting Management System</name>
+        <uuid>_f-0000dcd6-5ef6-8000-9aee-01075c01075c_8</uuid>
+        <description>Group Type used to combine MMS groups</description>
+        <attributes/>
+    </groupType>
+</groupTypeHaul>

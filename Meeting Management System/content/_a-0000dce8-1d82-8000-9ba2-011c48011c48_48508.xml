@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_GetMeetingAttendeeFeedbackDetails</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_48508</uuid>
+        <description>Returns the feedback details of attendees of a meeting</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35718</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>if(&#xD;
+  #&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;({ri!int_meetingId,ri!bool_checkInStatus}),{},&#xD;
+  #&quot;SYSTEM_SYSRULES_queryEntity&quot;(&#xD;
+    entity:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35548&quot;,&#xD;
+    query:#&quot;SYSTEM_SYSRULES_query&quot;(&#xD;
+      selection:#&quot;SYSTEM_SYSRULES_querySelection&quot;(&#xD;
+        columns:{&#xD;
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;userName&quot;),&#xD;
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;attendeeFullName&quot;),&#xD;
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;feedback&quot;),&#xD;
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;rating&quot;)&#xD;
+        }&#xD;
+      ),&#xD;
+      logicalExpression:#&quot;SYSTEM_SYSRULES_queryLogicalExpression&quot;(&#xD;
+        operator:&quot;AND&quot;,&#xD;
+        filters:{&#xD;
+          #&quot;SYSTEM_SYSRULES_queryFilter&quot;(&#xD;
+            field:&quot;meetingId&quot;,operator:&quot;=&quot;,value:ri!int_meetingId&#xD;
+          ),&#xD;
+          #&quot;SYSTEM_SYSRULES_queryFilter&quot;(&#xD;
+            field:&quot;isAttended&quot;,operator:&quot;=&quot;,value:ri!bool_checkInStatus&#xD;
+          ),&#xD;
+          #&quot;SYSTEM_SYSRULES_queryFilter&quot;(&#xD;
+            field:&quot;rating&quot;,operator:&quot;not null&quot;&#xD;
+          )&#xD;
+        }&#xD;
+      ),&#xD;
+      pagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(&#xD;
+        startIndex:1,&#xD;
+        batchSize:-1,&#xD;
+        sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(field:&quot;userName&quot;)&#xD;
+      )&#xD;
+    )&#xD;
+  ).data&#xD;
+)</definition>
+        <namedTypedValue>
+            <name>int_meetingId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>bool_checkInStatus</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <queryRule>
+        <name>MMS_GetRemindersActiveAndNotPosted</name>
+        <uuid>e9ae0f8e-4dce-46cc-a4ba-d2bfe28bbf2f</uuid>
+        <description>rule returns reminders based on reminder status, meeting id, date time, post status</description>
+        <folderUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35543</folderUuid>
+        <dataStoreEntityCompositeUuid>8ad1f500-156a-4215-bcfe-a2531cd8be3a@_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35539</dataStoreEntityCompositeUuid>
+        <params>
+            <param>
+                <description></description>
+                <name>int_meetingId</name>
+                <type>{http://www.w3.org/2001/XMLSchema}int</type>
+            </param>
+            <param>
+                <description></description>
+                <name>dt_dateTime</name>
+                <type>{http://www.w3.org/2001/XMLSchema}dateTime</type>
+            </param>
+            <param>
+                <description></description>
+                <name>isActive</name>
+                <type>{http://www.w3.org/2001/XMLSchema}boolean</type>
+            </param>
+            <param>
+                <description></description>
+                <name>isPosted</name>
+                <type>{http://www.w3.org/2001/XMLSchema}boolean</type>
+            </param>
+        </params>
+        <filters>
+            <filter>
+                <field>
+                    <name>meetingId</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}int</type>
+                </field>
+                <op>=</op>
+                <value>int_meetingId</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+            <filter>
+                <field>
+                    <name>reminderDateTime</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}dateTime</type>
+                </field>
+                <op>&gt;=</op>
+                <value>dt_dateTime</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+            <filter>
+                <field>
+                    <name>isActive</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}boolean</type>
+                </field>
+                <op>=</op>
+                <value>isActive</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+        </filters>
+        <orderings>
+            <ordering>
+                <ascending>true</ascending>
+                <field>
+                    <name>reminderDateTime</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}dateTime</type>
+                </field>
+            </ordering>
+        </orderings>
+    </queryRule>
+    <roleMap public="false">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>Pavithra</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

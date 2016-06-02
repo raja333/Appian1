@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <queryRule>
+        <name>MMS_GetNoteDetailsBasedOnMeetingId</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_46310</uuid>
+        <description>Rule returns Meeting Notes Based on Meeting Id</description>
+        <folderUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35543</folderUuid>
+        <dataStoreEntityCompositeUuid>2fc87e9e-d877-49ab-adb2-750fa16a981d@_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35539</dataStoreEntityCompositeUuid>
+        <params>
+            <param>
+                <description></description>
+                <name>int_meetingId</name>
+                <type>{http://www.w3.org/2001/XMLSchema}int</type>
+            </param>
+        </params>
+        <filters>
+            <filter>
+                <field>
+                    <name>meetingId</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}int</type>
+                </field>
+                <op>=</op>
+                <value>int_meetingId</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+        </filters>
+        <orderings>
+            <ordering>
+                <ascending>false</ascending>
+                <field>
+                    <name>createdDate</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}dateTime</type>
+                </field>
+            </ordering>
+        </orderings>
+    </queryRule>
+    <roleMap public="false">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

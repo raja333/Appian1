@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_DashboardAttendeeDetails</name>
+        <uuid>e6be2a9a-e52c-49f5-a93f-d9d25120879b</uuid>
+        <description>Interface displays attendee details on dashbaord</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35682</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>#&quot;SYSTEM_SYSRULES_dashboardLayout&quot;(
+  firstColumnContents: {
+    load(
+      local!pagingInfo: #&quot;SYSTEM_SYSRULES_pagingInfo&quot;(
+        startIndex: 1,
+        batchSize: 20,
+        sort: #&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+          field: &quot;attendeeFullName&quot;,
+          ascending: true
+        )
+      ),
+      with(
+        local!cdt_attendeeDetails: if(
+          #&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(
+            ri!int_meetingId
+          ),
+          {},
+          #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35719&quot;(
+            int_meetingId: ri!int_meetingId,
+            any_pagingInfo: local!pagingInfo
+          )
+        ),
+        local!dataSubset: fn!todatasubset(
+          local!cdt_attendeeDetails,
+          local!pagingInfo
+        ),
+        local!data: index(
+          local!dataSubset,
+          &quot;data&quot;,
+          {}
+        ),
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(
+          totalCount: local!dataSubset.totalCount,
+          columns: {
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47374&quot;,
+              field: &quot;attendeeFullName&quot;,
+              data: index(
+                local!data,
+                &quot;attendeeFullName&quot;,
+                {}
+              )
+            ),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47375&quot;,
+              field: &quot;checkInTime&quot;,
+              data: apply(
+                #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35708&quot;(
+                  _
+                ),
+                fn!index(
+                  local!data,
+                  &quot;checkInTime&quot;,
+                  {}
+                )
+              )
+            ),
+            #&quot;SYSTEM_SYSRULES_gridImageColumn&quot;(
+              label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47376&quot;,
+              field: &quot;isAttended&quot;,
+              size: &quot;ICON&quot;,
+              data: apply(
+                #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35714&quot;(
+                  _
+                ),
+                index(
+                  local!data,
+                  &quot;isAttended&quot;,
+                  {}
+                )
+              )
+            )
+          },
+          value: local!pagingInfo,
+          saveInto: local!pagingInfo
+        )
+      )
+    )
+  }
+)</definition>
+        <namedTypedValue>
+            <name>int_meetingId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>Pavithra</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                    <a:nameRef>int_meetingId</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

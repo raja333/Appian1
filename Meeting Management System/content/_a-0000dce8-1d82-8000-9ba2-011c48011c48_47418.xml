@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_TotalMeetingVolume</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47418</uuid>
+        <description>Interface displays total meeting volume report</description>
+        <parentUuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47417</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!monthPagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex:1,batchSize:6),
+  local!meetingPagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex:1,batchSize:10,sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(ascending:false,field:&quot;createDate&quot;)),
+  local!dropdownValue:3,
+  local!selectedDate,
+  {
+  with(
+    local!enumerateNumber:1+fn!enumerate(local!dropdownValue),
+    local!searchResults:fn!apply(
+                            #&quot;b749d5af-ecbe-4a5f-98b5-4cad43b32ad1&quot;(_),
+                            local!enumerateNumber
+                            ),
+    local!todatasubset:fn!todatasubset(local!searchResults,local!monthPagingInfo),
+    local!data:index(local!todatasubset,&quot;data&quot;,{}),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label:&quot;&quot;,
+      firstColumnContents:{
+        #&quot;SYSTEM_SYSRULES_dropdownField&quot;(
+          label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47584&quot;,
+          choiceLabels:apply(concat(_,&quot; &quot;,#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47565&quot;),#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47560&quot;),
+          choiceValues:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47560&quot;,
+          value:local!dropdownValue,
+          saveInto:{
+            a!save(local!dropdownValue,save!value),
+            a!save(local!selectedDate,null)
+          }
+        ),
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(
+          totalCount:local!todatasubset.totalCount,
+          columns:{
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47565&quot;,
+              field:&quot;month&quot;,
+              data:index(local!data,&quot;month&quot;,{}),
+              links:fn!apply(
+                    #&quot;SYSTEM_SYSRULES_dynamicLink&quot;(
+                      value:_, 
+                      saveInto:{
+                        a!save(local!selectedDate,save!value),
+                        a!save(local!meetingPagingInfo,#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex:1,batchSize:5,sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(ascending:false,field:&quot;createDate&quot;)))
+                      }
+                      ),
+                      index(local!data,&quot;monthlastDate&quot;,{})
+                  )
+            ),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47572&quot;,
+              field:&quot;count&quot;,
+              data:index(local!data,&quot;count&quot;,{})
+            )
+          },
+          value:local!monthPagingInfo,
+          saveInto:local!monthPagingInfo
+        )
+      },
+      secondColumnContents:{
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          readOnly:true
+        )
+      }
+      )
+  ),
+  if(#&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(local!selectedDate),{},
+    #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47612&quot;(local!selectedDate,local!meetingPagingInfo)
+  )
+  }
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

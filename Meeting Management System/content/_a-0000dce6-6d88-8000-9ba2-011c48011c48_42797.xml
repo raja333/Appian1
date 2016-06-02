@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_FormMeetingReviewReminder</name>
+        <uuid>_a-0000dce6-6d88-8000-9ba2-011c48011c48_42797</uuid>
+        <description>Interface provides a form for meeting review reminder</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35681</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= load(
+  local!cdt_attendees: if(
+    #&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(
+      ri!cdt_meetingDetails
+    ),
+    {},
+    #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_46303&quot;(
+      ri!cdt_meetingDetails.meetingId,
+      true()
+    )
+  ),
+  #&quot;SYSTEM_SYSRULES_formLayout&quot;(
+    label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47411&quot;,
+    firstColumnContents: {
+      #&quot;07e2806e-d51a-4bf4-b8d4-f6f2b1b8c97c&quot;(
+        cdt_meetingDetails: ri!cdt_meetingDetails,
+        cdt_attendees: local!cdt_attendees
+      ),
+      #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+        label: #&quot;_a-0000dce6-6d88-8000-9ba2-011c48011c48_42823&quot;,
+        labelPosition: &quot;ADJACENT&quot;,
+        placeholder: #&quot;ce33d2fb-5d58-49cb-b1ac-15b9d1292818&quot;(
+          4000
+        ),
+        value: ri!txt_feedMessage,
+        saveInto: ri!txt_feedMessage,
+        required: true,
+        validations: if(
+          len(
+            ri!txt_feedMessage
+          ) &gt; 4000,
+          #&quot;ce33d2fb-5d58-49cb-b1ac-15b9d1292818&quot;(
+            4000
+          ),
+          null
+        )
+      )
+    },
+    buttons: {
+      #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+        primaryButtons: {
+          #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+            label: #&quot;_a-0000dce6-6d88-8000-9ba2-011c48011c48_42825&quot;,
+            style: &quot;PRIMARY&quot;,
+            value: #&quot;_a-0000dce6-6d88-8000-9ba2-011c48011c48_42825&quot;,
+            saveInto: ri!txt_buttonAction
+          )
+        },
+        secondaryButtons: {
+          #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+            label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47700&quot;,
+            confirmmessage: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_48884&quot;,
+            value: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47700&quot;,
+            saveInto: ri!txt_buttonAction,
+            skipValidation: true
+          )
+        }
+      )
+    }
+  )
+)</definition>
+        <namedTypedValue>
+            <name>cdt_meetingDetails</name>
+            <type>
+                <name>MMS_MeetingDetails</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cdt_attendees</name>
+            <type>
+                <name>MMS_Attendees?list</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>txt_feedMessage</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>txt_buttonAction</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:n1="urn:com:mms:appian:types:MMS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="n1:MMS_MeetingDetails"/>
+                    <a:nameRef>cdt_meetingDetails</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:nameRef>cdt_attendees</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                    <a:nameRef>txt_feedMessage</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                    <a:nameRef>txt_buttonAction</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_DashboardNotesDetails</name>
+        <uuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35706</uuid>
+        <description>Interface displays Meeting Notes in dashboard </description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35682</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!pagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex:1,batchSize:20,
+                                sort:#&quot;SYSTEM_SYSRULES_sortInfo&quot;(
+                                  ascending:false,
+                                  field:&quot;createdDate&quot;
+                                )
+  ),
+  with(
+    local!cdt_meetingNotes:if(#&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(ri!int_meetingId),{},
+                              #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_46310&quot;(ri!int_meetingId,local!pagingInfo)
+    ),
+    local!data:index(local!cdt_meetingNotes,&quot;data&quot;,{}),
+    #&quot;SYSTEM_SYSRULES_gridField&quot;(
+      label:&quot;&quot;,
+      labelPosition: &quot;ABOVE&quot;,    
+      totalCount:local!cdt_meetingNotes.totalCount,
+      columns:{
+        #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+         label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35613&quot;,
+         field:&quot;notes&quot;,
+         data:index(local!data,&quot;notes&quot;,{})
+        ),
+        #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+         label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47402&quot;,
+         field:&quot;createdUser&quot;,
+         data:apply(#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35710&quot;,
+                    index(local!data,&quot;createdUser&quot;,{}))
+        ),
+        #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+         label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47403&quot;,
+         field:&quot;createdDate&quot;,
+         data:apply(#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35708&quot;(_),
+                      index(local!data,&quot;createdDate&quot;,{}))
+        )
+      },
+      value:local!pagingInfo,
+      saveInto:local!pagingInfo
+    )
+  )
+)</definition>
+        <namedTypedValue>
+            <name>int_meetingId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                    <a:nameRef>int_meetingId</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

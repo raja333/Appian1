@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataStoreHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <dataStore>
+        <uuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35539</uuid>
+        <name>MMS_MeetingManagementSystem</name>
+        <description>Data Source for Meeting Management System</description>
+        <dataSourceKey>java:/jdbc/Appian</dataSourceKey>
+        <adaptingExplicitSqlNames>false</adaptingExplicitSqlNames>
+        <autoUpdateSchema>false</autoUpdateSchema>
+        <entities>
+            <entity>
+                <uuid>8c74cd76-1f97-431d-ae9d-23b842b75a60</uuid>
+                <name>MMS_Attendees</name>
+                <type>{urn:com:mms:appian:types:MMS}MMS_Attendees</type>
+            </entity>
+            <entity>
+                <uuid>3c19544f-66ed-4b3e-91c7-102145b45673</uuid>
+                <name>MMS_Feeds</name>
+                <type>{urn:com:mms:appian:types:MMS}MMS_Feeds</type>
+            </entity>
+            <entity>
+                <uuid>e98966a3-a59e-4c04-9df1-b3d791a900ea</uuid>
+                <name>MMS_MeetingDetails</name>
+                <type>{urn:com:mms:appian:types:MMS}MMS_MeetingDetails</type>
+            </entity>
+            <entity>
+                <uuid>2fc87e9e-d877-49ab-adb2-750fa16a981d</uuid>
+                <name>MMS_Notes</name>
+                <type>{urn:com:mms:appian:types:MMS}MMS_Notes</type>
+            </entity>
+            <entity>
+                <uuid>8ad1f500-156a-4215-bcfe-a2531cd8be3a</uuid>
+                <name>MMS_Reminders</name>
+                <type>{urn:com:mms:appian:types:MMS}MMS_Reminders</type>
+            </entity>
+        </entities>
+    </dataStore>
+    <isPublished>true</isPublished>
+    <roleMap>
+        <role allowForAll="false" inherit="false" name="administrators">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dcd6-5ef6-8000-9aee-01075c01075c_140</groupUuid>
+            </groups>
+        </role>
+        <role allowForAll="false" inherit="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="readers">
+            <users/>
+            <groups>
+                <groupUuid>_e-0000dcd6-5ef6-8000-9aee-01075c01075c_138</groupUuid>
+            </groups>
+        </role>
+    </roleMap>
+</dataStoreHaul>

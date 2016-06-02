@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_FomMeetingFeedback</name>
+        <uuid>940c797f-e79b-4349-840f-7736f55e56be</uuid>
+        <description>Interface for Meeting Feedback details</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35681</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!cdt_attendees: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47335&quot;(
+    int_meetingId: ri!cdt_meetingDetails.meetingId,
+    bool_checkInStatus: true()
+  ),
+  #&quot;SYSTEM_SYSRULES_formLayout&quot;(
+    label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47385&quot;,
+    instructions: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47384&quot;,
+    firstColumnContents: {
+      #&quot;07e2806e-d51a-4bf4-b8d4-f6f2b1b8c97c&quot;(
+        cdt_meetingDetails: ri!cdt_meetingDetails,
+        cdt_attendees: local!cdt_attendees
+      ),
+      if(
+        #&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(
+          ri!cdt_meetingDetails.summary
+        ),
+        {},
+        #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+          label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47319&quot;,
+          labelPosition: &quot;ADJACENT&quot;,
+          readOnly: true,
+          value: ri!cdt_meetingDetails.summary
+        )
+      ),
+      #&quot;SYSTEM_SYSRULES_radioButtonField&quot;(
+        label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47318&quot;,
+        required: true,
+        requiredMessage: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47877&quot;,
+        choiceLabels: {
+          1,
+          2,
+          3,
+          4,
+          5
+        },
+        choiceValues: {
+          1,
+          2,
+          3,
+          4,
+          5
+        },
+        choiceLayout: &quot;COMPACT&quot;,
+        labelPosition: &quot;ADJACENT&quot;,
+        value: ri!cdt_attendeeDetails.rating,
+        saveInto: ri!cdt_attendeeDetails.rating
+      ),
+      #&quot;SYSTEM_SYSRULES_paragraphField&quot;(
+        label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47321&quot;,
+        required: true,
+        labelPosition: &quot;ADJACENT&quot;,
+        requiredMessage: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47876&quot;,
+        placeholder: #&quot;ce33d2fb-5d58-49cb-b1ac-15b9d1292818&quot;(
+          2000
+        ),
+        value: ri!cdt_attendeeDetails.feedback,
+        validations: {
+          if(
+            len(
+              ri!cdt_attendeeDetails.feedback
+            ) &gt; 2000,
+            #&quot;ce33d2fb-5d58-49cb-b1ac-15b9d1292818&quot;(
+              2000
+            ),
+            null
+          )
+        },
+        saveInto: {
+          a!save(
+            ri!cdt_attendeeDetails.feedback,
+            save!value
+          )
+        }
+      )
+    },
+    buttons: {
+      #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+        primaryButtons: {
+          #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+            label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47322&quot;,
+            value: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47322&quot;,
+            style: &quot;PRIMARY&quot;,
+            saveInto: {
+              a!save(
+                ri!txt_buttonAction,
+                save!value
+              ),
+              a!save(
+                ri!cdt_attendeeDetails.modifiedDate,
+                now()
+              ),
+              a!save(
+                ri!cdt_attendeeDetails.modifiedUser,
+                loggedinuser()
+              )
+            }
+          )
+        },
+        secondaryButtons: {
+          #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+            label: #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35603&quot;,
+            value: #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35603&quot;,
+            confirmMessage:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_48883&quot;,
+            skipValidation: true,
+            saveInto: ri!txt_buttonAction
+          )
+        }
+      )
+    }
+  )
+)</definition>
+        <namedTypedValue>
+            <name>cdt_meetingDetails</name>
+            <type>
+                <name>MMS_MeetingDetails</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>txt_buttonAction</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cdt_attendeeDetails</name>
+            <type>
+                <name>MMS_Attendees</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users>
+                <userUuid>Pavithra</userUuid>
+            </users>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:n1="urn:com:mms:appian:types:MMS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="n1:MMS_MeetingDetails"/>
+                    <a:nameRef>cdt_meetingDetails</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                    <a:nameRef>txt_buttonAction</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:n1="urn:com:mms:appian:types:MMS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="n1:MMS_Attendees"/>
+                    <a:nameRef>cdt_attendeeDetails</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

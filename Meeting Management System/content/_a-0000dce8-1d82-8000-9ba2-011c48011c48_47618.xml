@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_ReportAverageMeetingUsefulness</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47618</uuid>
+        <description>Average Meeting Usefulness Report</description>
+        <parentUuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47417</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+  local!searchUser:null,
+  local!pagingInfo:#&quot;SYSTEM_SYSRULES_pagingInfo&quot;(startIndex:1,batchSize:10),
+  with(
+    local!search:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47615&quot;(local!searchUser),
+    local!searchResults:apply(
+                      'type!{urn:com:mms:appian:types:MMS}MMS_MeetingDetails'(
+                        createdUser:_,
+                        averageRating:_,
+                        summary:_
+                      ),
+                      merge(
+                        index(local!search,&quot;createdUser&quot;,{}),
+                        index(local!search,&quot;averageRating&quot;,{}),
+                        apply(#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35710&quot;(_),index(local!search,&quot;createdUser&quot;,{}))
+                      )
+                      ),
+    local!datasubset:fn!todatasubset(local!searchResults,local!pagingInfo),
+    local!data:index(local!datasubset,&quot;data&quot;,{}),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      firstColumnContents:{
+        #&quot;SYSTEM_SYSRULES_pickerFieldUsers&quot;(
+          label:#&quot;_a-0000dce6-2b45-8000-9ba2-011c48011c48_42671&quot;,
+          groupFilter:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35702&quot;,
+          value:local!searchUser,
+          saveInto:local!searchUser
+        ),
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(
+          totalCount:local!datasubset.totalCount,
+          columns:{
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label:#&quot;_a-0000dce6-2b45-8000-9ba2-011c48011c48_42671&quot;,
+              field:&quot;summary&quot;,
+              data:index(local!data,&quot;summary&quot;,{})
+            ),
+            #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+              label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47629&quot;,
+              field:&quot;averageRating&quot;,
+              data:index(local!data,&quot;averageRating&quot;,{})
+            )
+          },
+          value:local!pagingInfo,
+          saveInto:local!pagingInfo
+        )
+      },
+      secondColumnContents:{
+        #&quot;SYSTEM_SYSRULES_textField&quot;(
+          readOnly:true
+        )
+      }
+    )
+  )
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

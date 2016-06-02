@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_PopulateCdtsForModifedAttendees</name>
+        <uuid>754d7bbe-bcb8-42f9-a53f-f61d0cf60cf6</uuid>
+        <description>Rule populate CDTs for updated, removed, new attendees</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35544</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>with(&#xD;
+  local!txt_attendees:fn!apply(fn!toString(_),ri!user_attendees),&#xD;
+  local!cdt_existingAttendees:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_46303&quot;(&#xD;
+                                    int_meetingId:ri!int_meeting,&#xD;
+                                    bool_isActive:true()&#xD;
+                                    ),&#xD;
+  local!txt_existingAttendees:index(local!cdt_existingAttendees,&quot;userName&quot;,null),&#xD;
+&#xD;
+  local!txt_newAttendees:fn!difference(local!txt_attendees,local!txt_existingAttendees),&#xD;
+  local!cdt_newAttendees:if(#&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(local!txt_newAttendees),{},&#xD;
+              #&quot;_a-0000dce6-6d88-8000-9ba2-011c48011c48_43035&quot;(&#xD;
+                            userName:local!txt_newAttendees,&#xD;
+                            txt_createdUser:ri!txt_createdUser,&#xD;
+                            meetingId:ri!int_meeting&#xD;
+                          )&#xD;
+                          ),&#xD;
+  local!txt_removedAttendees:fn!difference(local!txt_existingAttendees,local!txt_attendees),&#xD;
+  local!cdt_removedAttendees:if(#&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(local!txt_removedAttendees),{},&#xD;
+              #&quot;_a-0000dce6-6d88-8000-9ba2-011c48011c48_43036&quot;(&#xD;
+                            txt_userNames:local!txt_removedAttendees,&#xD;
+                            txt_updatedUser:ri!txt_createdUser,&#xD;
+                            int_meetingId:ri!int_meeting&#xD;
+                          )&#xD;
+                          ),&#xD;
+&#xD;
+  local!txt_existAttendees:fn!intersection(local!txt_existingAttendees,local!txt_attendees),&#xD;
+  local!cdt_updatedUsers:if(#&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(local!txt_existAttendees),{},&#xD;
+                	#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47425&quot;(&#xD;
+                	  txt_userNames:local!txt_existAttendees,&#xD;
+                	  xt_updatedUser:ri!txt_createdUser, &#xD;
+                	  int_meetingId:ri!int_meeting&#xD;
+                	)&#xD;
+              ),&#xD;
+  {&#xD;
+    local!cdt_newAttendees,&#xD;
+    local!cdt_removedAttendees,&#xD;
+    local!cdt_updatedUsers&#xD;
+  }            &#xD;
+)</definition>
+        <namedTypedValue>
+            <name>int_meeting</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>txt_createdUser</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>user_attendees</name>
+            <type>
+                <name>User?list</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

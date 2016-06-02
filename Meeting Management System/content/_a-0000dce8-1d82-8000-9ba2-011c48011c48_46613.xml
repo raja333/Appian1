@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <queryRule>
+        <name>MMS_GetAttendeeBasedOnNameAndMeetingId</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_46613</uuid>
+        <description>Rule returns attendee details based on user name and meeting id</description>
+        <folderUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35543</folderUuid>
+        <dataStoreEntityCompositeUuid>8c74cd76-1f97-431d-ae9d-23b842b75a60@_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35539</dataStoreEntityCompositeUuid>
+        <params>
+            <param>
+                <description></description>
+                <name>int_meetingId</name>
+                <type>{http://www.w3.org/2001/XMLSchema}int</type>
+            </param>
+            <param>
+                <description></description>
+                <name>txt_userName</name>
+                <type>{http://www.appian.com/ae/types/2009}Text?list</type>
+            </param>
+        </params>
+        <filters>
+            <filter>
+                <field>
+                    <name>meetingId</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}int</type>
+                </field>
+                <op>=</op>
+                <value>int_meetingId</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+            <filter>
+                <field>
+                    <name>userName</name>
+                    <type>{http://www.w3.org/2001/XMLSchema}string</type>
+                </field>
+                <op>in</op>
+                <value>txt_userName</value>
+                <valueType>PARAMETER</valueType>
+            </filter>
+        </filters>
+        <orderings/>
+    </queryRule>
+    <roleMap public="false">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

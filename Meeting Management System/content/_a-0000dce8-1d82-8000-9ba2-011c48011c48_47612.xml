@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_SectionMeetingDetailsGrid</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47612</uuid>
+        <description>Interface  displays meeting details in a grid</description>
+        <parentUuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47417</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>with(
+    local!meetingDataSubset:fn!todatasubset(
+                                #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47580&quot;(ri!selectedDate),
+                                ri!meetingPagingInfo
+                                ),
+    local!meetingData:index(local!meetingDataSubset,&quot;data&quot;,{}),
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(
+      label:&quot;&quot;,
+      firstColumnContents:{
+        #&quot;SYSTEM_SYSRULES_richTextDisplayField&quot;(
+            value:#&quot;SYSTEM_SYSRULES_richTextItem&quot;(
+              text:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47633&quot;&amp;&quot; &quot;&amp;text(ri!selectedDate,&quot;MMMM&quot;),
+              style:&quot;HEADER_MEDIUM&quot;
+            )          
+        ),
+        #&quot;SYSTEM_SYSRULES_gridField&quot;(
+          totalCount:local!meetingDataSubset.totalCount,
+          columns:{
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35612&quot;,
+                  field:&quot;subject&quot;,
+                  data:index(local!meetingData,&quot;subject&quot;,{})
+                ),
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label:#&quot;_a-0000dce6-2b45-8000-9ba2-011c48011c48_42671&quot;,
+                  field:&quot;createdUser&quot;,
+                  data:apply(
+                        #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35710&quot;(_),
+                        index(local!meetingData,&quot;createdUser&quot;,{})
+                  )
+                ),                
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35742&quot;,
+                  field:&quot;status&quot;,
+                  data:index(local!meetingData,&quot;status&quot;,{})
+                ),                
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47594&quot;,
+                  field:&quot;createDate&quot;,
+                  data:apply(
+                        #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35708&quot;(_),
+                        index(local!meetingData,&quot;createDate&quot;,{})
+                        )
+                ),                
+                #&quot;SYSTEM_SYSRULES_gridTextColumn&quot;(
+                  label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47372&quot;,
+                  field:&quot;averageRating&quot;,
+                  data:index(local!meetingData,&quot;averageRating&quot;,{})
+                )            
+          },
+          value:ri!meetingPagingInfo,
+          saveInto:ri!meetingPagingInfo
+        )
+      }
+    )
+)</definition>
+        <namedTypedValue>
+            <name>selectedDate</name>
+            <type>
+                <name>dateTime</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>meetingPagingInfo</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:dateTime"/>
+                    <a:nameRef>selectedDate</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                    <a:nameRef>meetingPagingInfo</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

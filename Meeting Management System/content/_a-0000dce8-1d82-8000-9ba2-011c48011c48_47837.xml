@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_FormPostDeploymentGuide</name>
+        <uuid>_a-0000dce8-1d82-8000-9ba2-011c48011c48_47837</uuid>
+        <description>Interface for post deployment guide</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35681</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= #&quot;SYSTEM_SYSRULES_formLayout&quot;(&#xD;
+  label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47839&quot;,&#xD;
+  instructions: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47840&quot;,&#xD;
+  firstColumnContents: {&#xD;
+    #&quot;SYSTEM_SYSRULES_sectionLayout&quot;(&#xD;
+      firstColumnContents: {&#xD;
+        #&quot;SYSTEM_SYSRULES_richTextDisplayField&quot;(&#xD;
+          labelPosition: &quot;COLLAPSED&quot;,&#xD;
+          value: {&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: &quot;Publish Data Store for MMS&quot;,&#xD;
+              style: &quot;HEADER_MEDIUM&quot;&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: {&#xD;
+                &quot;&#xD;
+1. Log in to designer mode. &#xD;
+2. Navigate to the System Tab.&#xD;
+3. Select the Data Stores tab and click on the 'MMS_MeetingManagementSystem '.&#xD;
+4. Select the appropriate business data store.&#xD;
+5. Verify the data store,and  click on the Save &amp; Publish .&#xD;
+6. Create a set of basic users for MMS application and add them to the corresponding application groups according to their roles.&#xD;
+&quot;&#xD;
+              }&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: &quot;Available MMS Application Actions&quot; &amp; char(&#xD;
+                10&#xD;
+              ) &amp; char(&#xD;
+                10&#xD;
+              ),&#xD;
+              style: &quot;HEADER_MEDIUM&quot;&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: &quot;MMS Post Deployment Guide &quot;&amp;char(10),&#xD;
+              style: &quot;NORMAL&quot;&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: {&#xD;
+                &quot;  This help guide aids the users who are using the application for the first time.It provides necessary actions to be performed initially to run the Meeting Management System application successfully.&#xD;
+&quot; &amp; char(&#xD;
+                  10&#xD;
+                )&#xD;
+              }&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: &quot;Update Timer Constraints  &quot;&amp;char(10),&#xD;
+              style: &quot;NORMAL&quot;&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: {&#xD;
+                &quot;  A utility process to manage and configure the default meeting timer configurations for various meeting tasks like Check in task activate time,Check in task expiry time,Feedback task expiry time and Summary task expiry time.&quot; &amp; char(&#xD;
+                  10&#xD;
+                ) &amp; char(&#xD;
+                  10&#xD;
+                )&#xD;
+              }&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: &quot;Schedule New Meeting &quot;&amp;char(10),&#xD;
+              style: &quot;NORMAL&quot;&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: {&#xD;
+                &quot;  Allows application users to schedule a meeting from the all users group called MMS Meeting All Users.&quot;&#xD;
+              }&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: &quot;MMS Application Groups&quot;,&#xD;
+              style: &quot;HEADER_MEDIUM&quot;&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: {&#xD;
+                &quot;&#xD;
+MMS All Users &quot;&amp;char(10)&amp;&quot;  A parent group for all application users. Users of this group can schedule meetings, view meeting details, and perform meeting tasks. All Basic Users of the system are automatically added to this group using group member ship policy to meet requirements of the application stating that any user can create a meeting.&#xD;
+&#xD;
+MMS Executive Users&quot;&amp;char(10)&amp;&quot;  A group of executive users, can create a meeting and view the statistics/reports regarding the meeting details available on the application.&#xD;
+&#xD;
+MMS Administrator Users &quot;&amp;char(10)&amp;&quot;  A group of Administrator users for the application. They can perform any action on a scheduled meeting like Update Meeting,Cancel Meeting and Add Note and view all available meeting details. &#xD;
+&#xD;
+MMS System Adminstrators &quot;&amp;char(10)&amp;&quot;  A group of system administrators to only monitor the process based issues and receive alerts and notifications about MMS application.&quot;&#xD;
+              }&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: &quot;Naming Conventions&quot;,&#xD;
+              style: &quot;HEADER_MEDIUM&quot;&#xD;
+            ),&#xD;
+            #&quot;SYSTEM_SYSRULES_richTextItem&quot;(&#xD;
+              text: {&#xD;
+                &quot;&#xD;
+1. Rules and constants are prefixed using the Meeting Management System application abbreviation (MMS).&#xD;
+2. All constants are written in UPPER case format.&#xD;
+3. All rules are written in upper camel case format (Ex: MMS_GetUserDisplayName()).&#xD;
+&quot;&#xD;
+              }&#xD;
+            )&#xD;
+          }&#xD;
+        )&#xD;
+      }&#xD;
+    )&#xD;
+  },&#xD;
+  buttons: #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(&#xD;
+    primaryButtons: {&#xD;
+      #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(&#xD;
+        label: #&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47838&quot;,&#xD;
+        style: &quot;PRIMARY&quot;&#xD;
+      )&#xD;
+    }&#xD;
+  )&#xD;
+)</definition>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

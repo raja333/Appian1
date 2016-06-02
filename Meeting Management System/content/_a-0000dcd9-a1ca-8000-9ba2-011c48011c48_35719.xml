@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MM_GetMeetingAttendeesBasedOnId</name>
+        <uuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35719</uuid>
+        <description>rule return meeting attendees based on meeting id</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35718</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>if(
+  #&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(ri!int_meetingId),{},
+  #&quot;SYSTEM_SYSRULES_queryEntity&quot;(
+    entity:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35548&quot;,
+    query:#&quot;SYSTEM_SYSRULES_query&quot;(
+      selection:#&quot;SYSTEM_SYSRULES_querySelection&quot;(
+        columns:{
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;isAttended&quot;),
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;attendeeFullName&quot;),
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;checkInTime&quot;),
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;userName&quot;),
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;feedback&quot;),
+          #&quot;SYSTEM_SYSRULES_queryColumn&quot;(field:&quot;rating&quot;)
+        }
+      ),
+      logicalExpression:#&quot;SYSTEM_SYSRULES_queryLogicalExpression&quot;(
+        operator:&quot;AND&quot;,
+        filters:{
+          #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+            field:&quot;meetingId&quot;,
+            operator:&quot;=&quot;,
+            value:ri!int_meetingId
+          ),
+          #&quot;SYSTEM_SYSRULES_queryFilter&quot;(
+            field:&quot;isActive&quot;,
+            operator:&quot;=&quot;,
+            value:true
+          )
+        }
+      ),
+      pagingInfo:ri!any_pagingInfo
+    )
+  ).data
+)</definition>
+        <namedTypedValue>
+            <name>int_meetingId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>any_pagingInfo</name>
+            <type>
+                <name>Variant</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>

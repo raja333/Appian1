@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_FormMeetingDetails</name>
+        <uuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35641</uuid>
+        <description>Interface for meeting details </description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35681</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>#&quot;SYSTEM_SYSRULES_formLayout&quot;(
+  label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47389&quot;,
+  instructions:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47387&quot;,
+  firstColumnContents:{
+    #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35624&quot;(
+      cdt_meetingDetails:ri!cdt_meetingDetails,
+      txtArr_attendees:ri!txtArr_attendees,
+      cdt_reminders:ri!cdt_reminders
+    ),
+    if(ri!cdt_meetingDetails.enableReminders,
+      #&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35630&quot;(
+        dt_meetingStartTime:ri!cdt_meetingDetails.startTime, 
+        cdt_reminders:ri!cdt_reminders, 
+        int_duration:ri!cdt_meetingDetails.duration,
+        bool_reviewReminders:ri!cdt_meetingDetails.enableReviewReminders
+      ),
+      {}
+    )
+  },
+  buttons:{
+    #&quot;SYSTEM_SYSRULES_ButtonLayout&quot;(
+      primaryButtons:{
+        #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+          label:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47388&quot;,
+          value:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_47388&quot;,
+          style:&quot;PRIMARY&quot;,
+          saveInto:{
+            a!save(ri!txt_buttonAction,save!Value),
+            a!save(ri!cdt_meetingDetails.processId,ri!int_processId),
+            a!save(ri!cdt_meetingDetails.status,#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35743&quot;[1]),
+            a!save(ri!cdt_meetingDetails.createDate,now()),
+            a!save(ri!cdt_meetingDetails.createdUser,loggedinuser()),            
+            a!save(ri!cdt_meetingDetails.isActive,true())
+          }
+        )
+      },
+      secondaryButtons:{
+        #&quot;SYSTEM_SYSRULES_ButtonWidgetSubmit&quot;(
+          label:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35603&quot;,
+          value:#&quot;_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35603&quot;,
+          confirmMessage:#&quot;_a-0000dce8-1d82-8000-9ba2-011c48011c48_48832&quot;,
+          skipValidation:true,
+          saveInto:ri!txt_buttonAction
+        )        
+      }
+    )
+  }
+)</definition>
+        <namedTypedValue>
+            <name>cdt_meetingDetails</name>
+            <type>
+                <name>MMS_MeetingDetails</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cdt_reminders</name>
+            <type>
+                <name>MMS_Reminders?list</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>txt_buttonAction</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>txtArr_attendees</name>
+            <type>
+                <name>User?list</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>int_processId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:n1="urn:com:mms:appian:types:MMS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="n1:MMS_MeetingDetails"/>
+                    <a:nameRef>cdt_meetingDetails</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:nameRef>cdt_reminders</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+                    <a:nameRef>txt_buttonAction</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:nameRef>txtArr_attendees</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:int"/>
+                    <a:nameRef>int_processId</a:nameRef>
+                    <a:id/>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+</contentHaul>

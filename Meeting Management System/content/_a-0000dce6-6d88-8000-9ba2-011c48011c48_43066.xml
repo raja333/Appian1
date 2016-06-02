@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <rule>
+        <name>MMS_PopulateReminderCDT</name>
+        <uuid>_a-0000dce6-6d88-8000-9ba2-011c48011c48_43066</uuid>
+        <description>Rule populates the reminder CDT</description>
+        <parentUuid>_a-0000dcd9-a1ca-8000-9ba2-011c48011c48_35544</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>with(&#xD;
+  local!count:count(ri!cdt_remminders),&#xD;
+  if(&#xD;
+    #&quot;2d2e017a-1587-4894-b66e-a7c33764b897&quot;(ri!cdt_remminders),{},&#xD;
+    apply(&#xD;
+    'type!{urn:com:mms:appian:types:MMS}MMS_Reminders'(&#xD;
+        reminderId:_,&#xD;
+        meetingId:_,&#xD;
+        reminderDateTime:_,&#xD;
+        createdUser:_,&#xD;
+        createDate:_,&#xD;
+        modifiedUser:_,&#xD;
+        modifiedDate:_,&#xD;
+        isActive:_&#xD;
+      ),&#xD;
+      merge(&#xD;
+        ri!cdt_remminders.reminderId,&#xD;
+        repeat(local!count,ri!meetingId),&#xD;
+        ri!cdt_remminders.reminderDateTime,&#xD;
+        ri!cdt_remminders.createdUser,&#xD;
+        ri!cdt_remminders.createDate,&#xD;
+        ri!cdt_remminders.modifiedUser,&#xD;
+        ri!cdt_remminders.modifiedDate,&#xD;
+        ri!cdt_remminders.isActive&#xD;
+    )&#xD;
+  )&#xD;
+)&#xD;
+)&#xD;
+&#xD;
+&#xD;
+</definition>
+        <namedTypedValue>
+            <name>cdt_remminders</name>
+            <type>
+                <name>MMS_Reminders?list</name>
+                <namespace>urn:com:mms:appian:types:MMS</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>meetingId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role allowForAll="false" inherit="true" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="true" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role allowForAll="false" inherit="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+</contentHaul>
