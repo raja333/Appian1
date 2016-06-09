@@ -26,6 +26,15 @@
             <name>Internal Releases</name>
             <url>http://172.18.254.24:8081/nexus/content/repositories/releases/</url>
         </repository>
+		
+		<plugin>            
+  <groupId>MGM</groupId>
+  <artifactId>MMS</artifactId>
+  <configuration>
+    <webXml>src\main\webapp\WEB-INF\web.xml</webXml>        
+  </configuration>
+</plugin>
+		
         <snapshotRepository>
             <id>deployment</id>
             <name>Internal Snapshot Releases</name>
